@@ -35,4 +35,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          cname: edible.eyzick.com
+          cname: pregnant.eyzick.com
