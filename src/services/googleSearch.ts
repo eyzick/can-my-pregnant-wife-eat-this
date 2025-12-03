@@ -234,6 +234,16 @@ export const searchGoogleSafety = async (query: string): Promise<GoogleSearchRes
                 link: `https://www.google.com/search?q=can+pregnant+women+eat+${encodeURIComponent(query)}`
             };
         }
+        if (error.response?.status === 404) {
+             console.error('Google Search 404: Check API Endpoint or CX ID');
+             return {
+                status: 'unknown',
+                summary: 'Search Configuration Error. Please verify API Key and Search Engine ID.',
+                snippet: 'The application is unable to connect to Google Search. Please check the console for details.',
+                source: 'System',
+                link: `https://www.google.com/search?q=can+pregnant+women+eat+${encodeURIComponent(query)}`
+             };
+        }
     }
     return null;
   }
