@@ -133,6 +133,9 @@ export const searchGoogleSafety = async (query: string): Promise<GoogleSearchRes
     const searchQ = `can I eat ${query} while pregnant`;
     const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(searchQ)}`;
     
+    console.log('API Key configured:', !!API_KEY);
+    console.log('CX configured:', !!CX);
+    
     const response = await axios.get(url);
     
     if (!response.data.items || response.data.items.length === 0) {
@@ -220,6 +223,18 @@ export const searchGoogleSafety = async (query: string): Promise<GoogleSearchRes
 
   } catch (error) {
     console.error('Google Search Error:', error);
+    if (axios.isAxiosError(error)) {
+        if (error.response?.status === 429) {
+            console.warn('Google Search Quota Exceeded');
+            return {
+                status: 'unknown',
+                summary: 'Daily search quota exceeded. Please try again tomorrow or use the direct Google link.',
+                snippet: 'The free search limit for this app has been reached for today.',
+                source: 'System',
+                link: `https://www.google.com/search?q=can+pregnant+women+eat+${encodeURIComponent(query)}`
+            };
+        }
+    }
     return null;
   }
 };
