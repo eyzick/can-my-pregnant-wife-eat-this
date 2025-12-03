@@ -238,9 +238,9 @@ export const searchGoogleSafety = async (query: string): Promise<GoogleSearchRes
              console.error('Google Search 404: Check API Endpoint or CX ID');
              return {
                 status: 'unknown',
-                summary: 'Search Configuration Error. Please verify API Key and Search Engine ID.',
-                snippet: 'The application is unable to connect to Google Search. Please check the console for details.',
-                source: 'System',
+                summary: 'Search configuration error. You can still search manually below.',
+                snippet: 'We are having trouble connecting to the search engine right now.',
+                source: 'Google Search',
                 link: `https://www.google.com/search?q=can+pregnant+women+eat+${encodeURIComponent(query)}`
              };
         }
