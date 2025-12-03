@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden;
+}
+
+.inner {
+  @apply p-6;
+}
+
+.label {
+  @apply text-sm font-bold text-gray-400 uppercase tracking-wider mb-4;
+}
+
+.contentWrapper {
+  @apply flex flex-col md:flex-row gap-6;
+}
+
+.thumbnail {
+  @apply w-full md:w-32 h-32 object-cover rounded-lg shadow-sm;
+}
+
+.textColumn {
+  @apply flex-1;
+}
+
+.title {
+  @apply text-xl font-bold text-gray-900 mb-2;
+}
+
+.extract {
+  @apply text-gray-600 leading-relaxed mb-4 line-clamp-4;
+}
+
+.actions {
+  @apply flex gap-3;
+}
+
+.linkBase {
+  @apply inline-flex items-center text-sm font-medium;
+}
+
+.wikiLink {
+  @apply text-blue-600 hover:text-blue-800;
+}
+
+.googleLink {
+  @apply text-rose-600 hover:text-rose-800;
+}
+
+.icon {
+  @apply ml-1;
+}
+
