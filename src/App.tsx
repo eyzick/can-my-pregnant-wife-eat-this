@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { SearchInput } from './components/SearchInput';
 import { StatusCard } from './components/StatusCard';
 import { WikiCard } from './components/WikiCard';
 import { searchWikipedia, WikiResult } from './services/wikipedia';
-import { searchGoogleSafety, GoogleSearchResult } from './services/googleSearch';
+import { GoogleSearchResult } from './services/googleSearch';
 import { Baby } from 'lucide-react';
 import styles from './App.module.css';
 
@@ -19,9 +20,20 @@ function App() {
     setSearchedQuery(query);
     setHasSearched(true);
     
+    // Fetch Google Search Results via Netlify Function
+    const fetchGoogleSearch = async (): Promise<GoogleSearchResult | null> => {
+        try {
+            const response = await axios.get(`/.netlify/functions/search?q=${encodeURIComponent(query)}`);
+            return response.data;
+        } catch (error) {
+            console.error("Proxy Search Error", error);
+            return null;
+        }
+    };
+
     const [wikiData, googleData] = await Promise.all([
       searchWikipedia(query),
-      searchGoogleSafety(query)
+      fetchGoogleSearch()
     ]);
 
     setWikiResult(wikiData);
