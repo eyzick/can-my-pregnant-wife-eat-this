@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { SafetyStatus } from '../data/types';
 
-// NOTE: These are exposed to the client, which is standard for this type of app.
-// However, we should ensure we have quota limits set in Google Cloud Console.
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 const CX = import.meta.env.VITE_GOOGLE_SEARCH_ENGINE_ID;
 
@@ -135,7 +133,6 @@ export const searchGoogleSafety = async (query: string): Promise<GoogleSearchRes
     const searchQ = `can I eat ${query} while pregnant`;
     const url = `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CX}&q=${encodeURIComponent(searchQ)}`;
     
-    // Debug logs to help verify environment variables in production
     console.log('API Key configured:', !!API_KEY);
     console.log('CX configured:', !!CX);
     
